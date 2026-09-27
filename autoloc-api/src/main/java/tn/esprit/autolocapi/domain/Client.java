@@ -1,0 +1,42 @@
+package tn.esprit.autolocapi.domain;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.time.LocalDate;
+
+@Entity
+@Table(name = "client")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class Client {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idClient;
+
+    @Column(nullable = false, length = 50)
+    private String nom;
+
+    @Column(nullable = false, length = 50)
+    private String prenom;
+
+    // Un email = un seul client
+    @Column(nullable = false, unique = true, length = 100)
+    private String email;
+
+    @Column(length = 20)
+    private String telephone;
+
+    // Un permis = un seul client
+    @Column(nullable = false, unique = true, length = 30)
+    private String numPermis;
+
+    // LocalDate -> colonne DATE (jour sans heure)
+    private LocalDate dateInscription;
+}
