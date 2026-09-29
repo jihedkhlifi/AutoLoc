@@ -1,32 +1,28 @@
 package tn.esprit.autolocapi.domain;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name = "contrat")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class Contrat {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idContrat;
-
     private LocalDate dateSignature;
-
-    @Column(precision = 10, scale = 2)
     private BigDecimal montantTotal;
-
-    // boolean (primitif) -> BIT NOT NULL, false par défaut
-    // Lombok génère isValide() (et non getValide()) pour un boolean
     private boolean valide;
+
+    // 1 ---- 1 Reservation (propriétaire : clé étrangère reservation_id)
+    @OneToOne
+    @JoinColumn(name = "reservation_id", unique = true)
+    private Reservation reservation;
+
+    // Composition (losange plein) : les paiements n'existent pas sans le contrat
+    @OneToMany(mappedBy = "contrat", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Paiement> paiements = new ArrayList<>();
 }

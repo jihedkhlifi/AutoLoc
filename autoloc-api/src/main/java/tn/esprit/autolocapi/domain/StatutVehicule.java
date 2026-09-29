@@ -1,5 +1,3 @@
 package tn.esprit.autolocapi.domain;
 
-public enum StatutVehicule {
-    DISPONIBLE, LOUE, MAINTENANCE
-}
+public enum StatutVehicule { DISPONIBLE, LOUE, MAINTENANCE }

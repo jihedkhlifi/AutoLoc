@@ -1,24 +1,19 @@
 package tn.esprit.autolocapi.domain;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-// Ex : GPS, siège bébé, chaînes neige...
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
-@Table(name = "equipement")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class Equipement {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idEquipement;
-
-    @Column(nullable = false, length = 100)
     private String libelle;
+
+    // côté inverse de la relation * ---- *
+    @ManyToMany(mappedBy = "equipements")
+    private List<Vehicule> vehicules = new ArrayList<>();
 }

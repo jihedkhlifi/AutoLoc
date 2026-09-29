@@ -1,29 +1,21 @@
 package tn.esprit.autolocapi.domain;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "maintenance")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class Maintenance {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idMaintenance;
-
-    @Column(nullable = false)
     private LocalDate dateDebut;
-
-    private LocalDate dateFin;            // NULL = maintenance encore en cours
-
+    private LocalDate dateFin;
     private String description;
+
+    // * ----> 1 Vehicule (unidirectionnelle : seule Maintenance connaît Vehicule)
+    @ManyToOne
+    @JoinColumn(name = "vehicule_id")
+    private Vehicule vehicule;
 }
