@@ -1,9 +1,9 @@
 package tn.esprit.autolocapi.service;
 
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import tn.esprit.autolocapi.domain.Client;
+import tn.esprit.autolocapi.exception.ResourceNotFoundException;
 import tn.esprit.autolocapi.repository.IClientRepository;
 
 import java.util.List;
@@ -12,37 +12,58 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ClientServiceImpl implements IClientService {
 
-    private static final String INTROUVABLE = "Client introuvable : id = ";
+    private static final String RESSOURCE = "Client";
 
     private final IClientRepository clientRepository;
 
     @Override
-    public Client addClient(Client client) {
-        return clientRepository.save(client);
-    }
-
-    @Override
-    public Client updateClient(Client client) {
-        Long id = client.getIdClient();
-        if (id == null || !clientRepository.existsById(id)) {
-            throw new EntityNotFoundException(INTROUVABLE + id);
+    public Client create(Client client) {
+        if (client.getIdClient() != null) {
+            throw new IllegalArgumentException("Un nouveau client ne doit pas avoir d'identifiant");
         }
+        valider(client);
         return clientRepository.save(client);
     }
 
     @Override
-    public Client retrieveClient(Long idClient) {
-        return clientRepository.findById(idClient)
-                .orElseThrow(() -> new EntityNotFoundException(INTROUVABLE + idClient));
+    public Client findById(Long id) {
+        return clientRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(RESSOURCE, id));
     }
 
     @Override
-    public List<Client> retrieveAllClients() {
+    public List<Client> findAll() {
         return clientRepository.findAll();
     }
 
     @Override
-    public void removeClient(Long idClient) {
-        clientRepository.deleteById(idClient);
+    public Client update(Long id, Client client) {
+        valider(client);
+        Client existant = findById(id);
+        existant.setNom(client.getNom());
+        existant.setPrenom(client.getPrenom());
+        existant.setEmail(client.getEmail());
+        existant.setTelephone(client.getTelephone());
+        existant.setNumPermis(client.getNumPermis());
+        existant.setDateInscription(client.getDateInscription());
+        return clientRepository.save(existant);
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        if (!clientRepository.existsById(id)) {
+            throw new ResourceNotFoundException(RESSOURCE, id);
+        }
+        clientRepository.deleteById(id);
+    }
+
+    private void valider(Client client) {
+        if (estVide(client.getNom()) || estVide(client.getEmail())) {
+            throw new IllegalArgumentException("Le nom et l'e-mail du client sont obligatoires");
+        }
+    }
+
+    private static boolean estVide(String valeur) {
+        return valeur == null || valeur.isBlank();
     }
 }
