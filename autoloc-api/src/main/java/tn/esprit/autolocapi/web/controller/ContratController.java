@@ -16,7 +16,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import tn.esprit.autolocapi.domain.Contrat;
+import tn.esprit.autolocapi.dto.ContratInputDto;
+import tn.esprit.autolocapi.dto.ContratResponseDto;
+import tn.esprit.autolocapi.mapper.ContratMapper;
+import jakarta.validation.Valid;
 import tn.esprit.autolocapi.service.IContratService;
 
 import java.util.List;
@@ -28,29 +31,30 @@ import java.util.List;
 public class ContratController {
 
     private final IContratService contratService;
+    private final ContratMapper mapper;
 
     @Operation(summary = "Creer un contrat")
     @ApiResponses({ @ApiResponse(responseCode = "201", description = "Creation reussie"),
             @ApiResponse(responseCode = "400", description = "Donnees invalides") })
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Contrat create(@RequestBody Contrat contrat) {
-        return contratService.create(contrat);
+    public ContratResponseDto create(@Valid @RequestBody ContratInputDto dto) {
+        return mapper.toDto(contratService.create(mapper.toEntity(dto)));
     }
 
     @Operation(summary = "Lister les contrats")
     @ApiResponses({ @ApiResponse(responseCode = "200", description = "Liste retournee") })
     @GetMapping
-    public List<Contrat> findAll() {
-        return contratService.findAll();
+    public List<ContratResponseDto> findAll() {
+        return contratService.findAll().stream().map(mapper::toDto).toList();
     }
 
     @Operation(summary = "Consulter un contrat")
     @ApiResponses({ @ApiResponse(responseCode = "200", description = "Ressource trouvee"),
             @ApiResponse(responseCode = "404", description = "Ressource introuvable") })
     @GetMapping("/{id}")
-    public Contrat findById(@Parameter(description = "Identifiant de la ressource") @PathVariable Long id) {
-        return contratService.findById(id);
+    public ContratResponseDto findById(@Parameter(description = "Identifiant de la ressource") @PathVariable Long id) {
+        return mapper.toDto(contratService.findById(id));
     }
 
     @Operation(summary = "Modifier un contrat")
@@ -58,8 +62,8 @@ public class ContratController {
             @ApiResponse(responseCode = "404", description = "Ressource introuvable"),
             @ApiResponse(responseCode = "400", description = "Donnees invalides") })
     @PutMapping("/{id}")
-    public Contrat update(@Parameter(description = "Identifiant de la ressource") @PathVariable Long id, @RequestBody Contrat contrat) {
-        return contratService.update(id, contrat);
+    public ContratResponseDto update(@Parameter(description = "Identifiant de la ressource") @PathVariable Long id, @Valid @RequestBody ContratInputDto dto) {
+        return mapper.toDto(contratService.update(id, mapper.toEntity(dto)));
     }
 
     @Operation(summary = "Supprimer un contrat")

@@ -16,7 +16,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import tn.esprit.autolocapi.domain.Maintenance;
+import tn.esprit.autolocapi.dto.MaintenanceInputDto;
+import tn.esprit.autolocapi.dto.MaintenanceResponseDto;
+import tn.esprit.autolocapi.mapper.MaintenanceMapper;
+import jakarta.validation.Valid;
 import tn.esprit.autolocapi.service.IMaintenanceService;
 
 import java.util.List;
@@ -28,29 +31,30 @@ import java.util.List;
 public class MaintenanceController {
 
     private final IMaintenanceService maintenanceService;
+    private final MaintenanceMapper mapper;
 
     @Operation(summary = "Creer une maintenance")
     @ApiResponses({ @ApiResponse(responseCode = "201", description = "Creation reussie"),
             @ApiResponse(responseCode = "400", description = "Donnees invalides") })
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Maintenance create(@RequestBody Maintenance maintenance) {
-        return maintenanceService.create(maintenance);
+    public MaintenanceResponseDto create(@Valid @RequestBody MaintenanceInputDto dto) {
+        return mapper.toDto(maintenanceService.create(mapper.toEntity(dto)));
     }
 
     @Operation(summary = "Lister les maintenances")
     @ApiResponses({ @ApiResponse(responseCode = "200", description = "Liste retournee") })
     @GetMapping
-    public List<Maintenance> findAll() {
-        return maintenanceService.findAll();
+    public List<MaintenanceResponseDto> findAll() {
+        return maintenanceService.findAll().stream().map(mapper::toDto).toList();
     }
 
     @Operation(summary = "Consulter une maintenance")
     @ApiResponses({ @ApiResponse(responseCode = "200", description = "Ressource trouvee"),
             @ApiResponse(responseCode = "404", description = "Ressource introuvable") })
     @GetMapping("/{id}")
-    public Maintenance findById(@Parameter(description = "Identifiant de la ressource") @PathVariable Long id) {
-        return maintenanceService.findById(id);
+    public MaintenanceResponseDto findById(@Parameter(description = "Identifiant de la ressource") @PathVariable Long id) {
+        return mapper.toDto(maintenanceService.findById(id));
     }
 
     @Operation(summary = "Modifier une maintenance")
@@ -58,8 +62,8 @@ public class MaintenanceController {
             @ApiResponse(responseCode = "404", description = "Ressource introuvable"),
             @ApiResponse(responseCode = "400", description = "Donnees invalides") })
     @PutMapping("/{id}")
-    public Maintenance update(@Parameter(description = "Identifiant de la ressource") @PathVariable Long id, @RequestBody Maintenance maintenance) {
-        return maintenanceService.update(id, maintenance);
+    public MaintenanceResponseDto update(@Parameter(description = "Identifiant de la ressource") @PathVariable Long id, @Valid @RequestBody MaintenanceInputDto dto) {
+        return mapper.toDto(maintenanceService.update(id, mapper.toEntity(dto)));
     }
 
     @Operation(summary = "Supprimer une maintenance")

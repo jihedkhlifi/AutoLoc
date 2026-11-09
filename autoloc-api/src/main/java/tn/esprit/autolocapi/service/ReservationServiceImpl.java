@@ -43,6 +43,8 @@ public class ReservationServiceImpl implements IReservationService {
         existante.setDateDebut(reservation.getDateDebut());
         existante.setDateFin(reservation.getDateFin());
         existante.setStatut(reservation.getStatut());
+        if (reservation.getVehicule() != null) existante.setVehicule(reservation.getVehicule());
+        if (reservation.getClient() != null) existante.setClient(reservation.getClient());
         return reservationRepository.save(existante);
     }
 

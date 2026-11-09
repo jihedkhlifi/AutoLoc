@@ -49,6 +49,7 @@ public class ContratServiceImpl implements IContratService {
         existant.setMontantTotal(contrat.getMontantTotal());
         existant.setValide(contrat.isValide());
         // ni l'identifiant ni la collection de paiements (orphanRemoval) ne sont touchés
+        if (contrat.getReservation() != null) existant.setReservation(contrat.getReservation());
         return contratRepository.save(existant);
     }
 

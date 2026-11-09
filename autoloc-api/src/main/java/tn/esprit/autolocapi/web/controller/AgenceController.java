@@ -16,7 +16,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import tn.esprit.autolocapi.domain.Agence;
+import tn.esprit.autolocapi.dto.AgenceInputDto;
+import tn.esprit.autolocapi.dto.AgenceResponseDto;
+import tn.esprit.autolocapi.mapper.AgenceMapper;
+import jakarta.validation.Valid;
 import tn.esprit.autolocapi.service.IAgenceService;
 
 import java.util.List;
@@ -28,29 +31,30 @@ import java.util.List;
 public class AgenceController {
 
     private final IAgenceService agenceService;
+    private final AgenceMapper mapper;
 
     @Operation(summary = "Creer une agence")
     @ApiResponses({ @ApiResponse(responseCode = "201", description = "Creation reussie"),
             @ApiResponse(responseCode = "400", description = "Donnees invalides") })
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Agence create(@RequestBody Agence agence) {
-        return agenceService.create(agence);
+    public AgenceResponseDto create(@Valid @RequestBody AgenceInputDto dto) {
+        return mapper.toDto(agenceService.create(mapper.toEntity(dto)));
     }
 
     @Operation(summary = "Lister les agences")
     @ApiResponses({ @ApiResponse(responseCode = "200", description = "Liste retournee") })
     @GetMapping
-    public List<Agence> findAll() {
-        return agenceService.findAll();
+    public List<AgenceResponseDto> findAll() {
+        return agenceService.findAll().stream().map(mapper::toDto).toList();
     }
 
     @Operation(summary = "Consulter une agence")
     @ApiResponses({ @ApiResponse(responseCode = "200", description = "Ressource trouvee"),
             @ApiResponse(responseCode = "404", description = "Ressource introuvable") })
     @GetMapping("/{id}")
-    public Agence findById(@Parameter(description = "Identifiant de la ressource") @PathVariable Long id) {
-        return agenceService.findById(id);
+    public AgenceResponseDto findById(@Parameter(description = "Identifiant de la ressource") @PathVariable Long id) {
+        return mapper.toDto(agenceService.findById(id));
     }
 
     @Operation(summary = "Modifier une agence")
@@ -58,8 +62,8 @@ public class AgenceController {
             @ApiResponse(responseCode = "404", description = "Ressource introuvable"),
             @ApiResponse(responseCode = "400", description = "Donnees invalides") })
     @PutMapping("/{id}")
-    public Agence update(@Parameter(description = "Identifiant de la ressource") @PathVariable Long id, @RequestBody Agence agence) {
-        return agenceService.update(id, agence);
+    public AgenceResponseDto update(@Parameter(description = "Identifiant de la ressource") @PathVariable Long id, @Valid @RequestBody AgenceInputDto dto) {
+        return mapper.toDto(agenceService.update(id, mapper.toEntity(dto)));
     }
 
     @Operation(summary = "Supprimer une agence")

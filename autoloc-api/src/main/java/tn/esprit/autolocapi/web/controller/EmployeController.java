@@ -16,7 +16,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import tn.esprit.autolocapi.domain.Employe;
+import tn.esprit.autolocapi.dto.EmployeInputDto;
+import tn.esprit.autolocapi.dto.EmployeResponseDto;
+import tn.esprit.autolocapi.mapper.EmployeMapper;
+import jakarta.validation.Valid;
 import tn.esprit.autolocapi.service.IEmployeService;
 
 import java.util.List;
@@ -28,29 +31,30 @@ import java.util.List;
 public class EmployeController {
 
     private final IEmployeService employeService;
+    private final EmployeMapper mapper;
 
     @Operation(summary = "Creer un employe")
     @ApiResponses({ @ApiResponse(responseCode = "201", description = "Creation reussie"),
             @ApiResponse(responseCode = "400", description = "Donnees invalides") })
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Employe create(@RequestBody Employe employe) {
-        return employeService.create(employe);
+    public EmployeResponseDto create(@Valid @RequestBody EmployeInputDto dto) {
+        return mapper.toDto(employeService.create(mapper.toEntity(dto)));
     }
 
     @Operation(summary = "Lister les employes")
     @ApiResponses({ @ApiResponse(responseCode = "200", description = "Liste retournee") })
     @GetMapping
-    public List<Employe> findAll() {
-        return employeService.findAll();
+    public List<EmployeResponseDto> findAll() {
+        return employeService.findAll().stream().map(mapper::toDto).toList();
     }
 
     @Operation(summary = "Consulter un employe")
     @ApiResponses({ @ApiResponse(responseCode = "200", description = "Ressource trouvee"),
             @ApiResponse(responseCode = "404", description = "Ressource introuvable") })
     @GetMapping("/{id}")
-    public Employe findById(@Parameter(description = "Identifiant de la ressource") @PathVariable Long id) {
-        return employeService.findById(id);
+    public EmployeResponseDto findById(@Parameter(description = "Identifiant de la ressource") @PathVariable Long id) {
+        return mapper.toDto(employeService.findById(id));
     }
 
     @Operation(summary = "Modifier un employe")
@@ -58,8 +62,8 @@ public class EmployeController {
             @ApiResponse(responseCode = "404", description = "Ressource introuvable"),
             @ApiResponse(responseCode = "400", description = "Donnees invalides") })
     @PutMapping("/{id}")
-    public Employe update(@Parameter(description = "Identifiant de la ressource") @PathVariable Long id, @RequestBody Employe employe) {
-        return employeService.update(id, employe);
+    public EmployeResponseDto update(@Parameter(description = "Identifiant de la ressource") @PathVariable Long id, @Valid @RequestBody EmployeInputDto dto) {
+        return mapper.toDto(employeService.update(id, mapper.toEntity(dto)));
     }
 
     @Operation(summary = "Supprimer un employe")

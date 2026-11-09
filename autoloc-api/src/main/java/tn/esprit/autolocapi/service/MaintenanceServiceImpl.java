@@ -43,6 +43,7 @@ public class MaintenanceServiceImpl implements IMaintenanceService {
         existante.setDateDebut(maintenance.getDateDebut());
         existante.setDateFin(maintenance.getDateFin());
         existante.setDescription(maintenance.getDescription());
+        if (maintenance.getVehicule() != null) existante.setVehicule(maintenance.getVehicule());
         return maintenanceRepository.save(existante);
     }
 
