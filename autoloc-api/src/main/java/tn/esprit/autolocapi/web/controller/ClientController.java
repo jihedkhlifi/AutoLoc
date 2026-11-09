@@ -1,5 +1,10 @@
 package tn.esprit.autolocapi.web.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,37 +21,53 @@ import tn.esprit.autolocapi.service.IClientService;
 
 import java.util.List;
 
+@Tag(name = "Clients", description = "Gestion des clients")
 @RestController
-@RequestMapping("/api/clients")
+@RequestMapping("/clients")
 @RequiredArgsConstructor
 public class ClientController {
 
     private final IClientService clientService;
 
+    @Operation(summary = "Creer un client")
+    @ApiResponses({ @ApiResponse(responseCode = "201", description = "Creation reussie"),
+            @ApiResponse(responseCode = "400", description = "Donnees invalides") })
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Client create(@RequestBody Client client) {
         return clientService.create(client);
     }
 
+    @Operation(summary = "Lister les clients")
+    @ApiResponses({ @ApiResponse(responseCode = "200", description = "Liste retournee") })
     @GetMapping
     public List<Client> findAll() {
         return clientService.findAll();
     }
 
+    @Operation(summary = "Consulter un client")
+    @ApiResponses({ @ApiResponse(responseCode = "200", description = "Ressource trouvee"),
+            @ApiResponse(responseCode = "404", description = "Ressource introuvable") })
     @GetMapping("/{id}")
-    public Client findById(@PathVariable Long id) {
+    public Client findById(@Parameter(description = "Identifiant de la ressource") @PathVariable Long id) {
         return clientService.findById(id);
     }
 
+    @Operation(summary = "Modifier un client")
+    @ApiResponses({ @ApiResponse(responseCode = "200", description = "Mise a jour reussie"),
+            @ApiResponse(responseCode = "404", description = "Ressource introuvable"),
+            @ApiResponse(responseCode = "400", description = "Donnees invalides") })
     @PutMapping("/{id}")
-    public Client update(@PathVariable Long id, @RequestBody Client client) {
+    public Client update(@Parameter(description = "Identifiant de la ressource") @PathVariable Long id, @RequestBody Client client) {
         return clientService.update(id, client);
     }
 
+    @Operation(summary = "Supprimer un client")
+    @ApiResponses({ @ApiResponse(responseCode = "204", description = "Suppression reussie"),
+            @ApiResponse(responseCode = "404", description = "Ressource introuvable") })
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteById(@PathVariable Long id) {
+    public void deleteById(@Parameter(description = "Identifiant de la ressource") @PathVariable Long id) {
         clientService.deleteById(id);
     }
 }

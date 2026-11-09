@@ -1,5 +1,6 @@
 package tn.esprit.autolocapi.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -15,5 +16,6 @@ public class Equipement {
 
     // côté inverse de la relation * ---- *
     @ManyToMany(mappedBy = "equipements")
+    @JsonIgnore
     private List<Vehicule> vehicules = new ArrayList<>();
 }

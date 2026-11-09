@@ -1,5 +1,10 @@
 package tn.esprit.autolocapi.web.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,37 +21,53 @@ import tn.esprit.autolocapi.service.IContratService;
 
 import java.util.List;
 
+@Tag(name = "Contrats", description = "Gestion des contrats de location")
 @RestController
-@RequestMapping("/api/contrats")
+@RequestMapping("/contrats")
 @RequiredArgsConstructor
 public class ContratController {
 
     private final IContratService contratService;
 
+    @Operation(summary = "Creer un contrat")
+    @ApiResponses({ @ApiResponse(responseCode = "201", description = "Creation reussie"),
+            @ApiResponse(responseCode = "400", description = "Donnees invalides") })
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Contrat create(@RequestBody Contrat contrat) {
         return contratService.create(contrat);
     }
 
+    @Operation(summary = "Lister les contrats")
+    @ApiResponses({ @ApiResponse(responseCode = "200", description = "Liste retournee") })
     @GetMapping
     public List<Contrat> findAll() {
         return contratService.findAll();
     }
 
+    @Operation(summary = "Consulter un contrat")
+    @ApiResponses({ @ApiResponse(responseCode = "200", description = "Ressource trouvee"),
+            @ApiResponse(responseCode = "404", description = "Ressource introuvable") })
     @GetMapping("/{id}")
-    public Contrat findById(@PathVariable Long id) {
+    public Contrat findById(@Parameter(description = "Identifiant de la ressource") @PathVariable Long id) {
         return contratService.findById(id);
     }
 
+    @Operation(summary = "Modifier un contrat")
+    @ApiResponses({ @ApiResponse(responseCode = "200", description = "Mise a jour reussie"),
+            @ApiResponse(responseCode = "404", description = "Ressource introuvable"),
+            @ApiResponse(responseCode = "400", description = "Donnees invalides") })
     @PutMapping("/{id}")
-    public Contrat update(@PathVariable Long id, @RequestBody Contrat contrat) {
+    public Contrat update(@Parameter(description = "Identifiant de la ressource") @PathVariable Long id, @RequestBody Contrat contrat) {
         return contratService.update(id, contrat);
     }
 
+    @Operation(summary = "Supprimer un contrat")
+    @ApiResponses({ @ApiResponse(responseCode = "204", description = "Suppression reussie"),
+            @ApiResponse(responseCode = "404", description = "Ressource introuvable") })
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteById(@PathVariable Long id) {
+    public void deleteById(@Parameter(description = "Identifiant de la ressource") @PathVariable Long id) {
         contratService.deleteById(id);
     }
 }

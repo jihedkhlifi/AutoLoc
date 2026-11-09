@@ -23,6 +23,10 @@ public class ContratServiceImpl implements IContratService {
             throw new IllegalArgumentException("Un nouveau contrat ne doit pas avoir d'identifiant");
         }
         valider(contrat);
+        // Lien proprietaire JPA indispensable pour la cascade Contrat -> Paiements.
+        if (contrat.getPaiements() != null) {
+            contrat.getPaiements().forEach(paiement -> paiement.setContrat(contrat));
+        }
         return contratRepository.save(contrat);
     }
 

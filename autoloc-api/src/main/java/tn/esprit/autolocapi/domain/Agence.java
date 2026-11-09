@@ -1,5 +1,6 @@
 package tn.esprit.autolocapi.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,9 +19,11 @@ public class Agence {
 
     // Agence 1 ---- * Employe
     @OneToMany(mappedBy = "agence")
+    @JsonIgnore
     private List<Employe> employes = new ArrayList<>();
 
     // Agence 1 ---- * Vehicule
     @OneToMany(mappedBy = "agence")
+    @JsonIgnore
     private List<Vehicule> vehicules = new ArrayList<>();
 }

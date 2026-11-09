@@ -1,5 +1,6 @@
 package tn.esprit.autolocapi.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,5 +21,6 @@ public class Paiement {
     // * ---- 1 Contrat
     @ManyToOne(optional = false)
     @JoinColumn(name = "contrat_id", nullable = false)
+    @JsonBackReference("contrat-paiements")
     private Contrat contrat;
 }
