@@ -4,13 +4,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.HandlerMethodValidationException;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.dao.DataIntegrityViolationException;
+import tn.esprit.autolocapi.exception.ConflitException;
 import tn.esprit.autolocapi.exception.ResourceNotFoundException;
 
 import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestControllerAdvice
@@ -29,6 +34,33 @@ public class GlobalExceptionHandler {
         Map<String, Object> body = corps(HttpStatus.BAD_REQUEST, "Validation des donnees echouee");
         body.put("erreurs", erreurs);
         return ResponseEntity.badRequest().body(body);
+    }
+
+    /** Contraintes (@NotBlank...) posees directement sur les @RequestParam / @PathVariable. */
+    @ExceptionHandler(HandlerMethodValidationException.class)
+    public ResponseEntity<Map<String, Object>> handleValidationParametres(HandlerMethodValidationException ex) {
+        List<String> erreurs = ex.getAllErrors().stream()
+                .map(erreur -> erreur.getDefaultMessage())
+                .toList();
+        Map<String, Object> body = corps(HttpStatus.BAD_REQUEST, "Validation des parametres echouee");
+        body.put("erreurs", erreurs);
+        return ResponseEntity.badRequest().body(body);
+    }
+
+    @ExceptionHandler(MissingServletRequestParameterException.class)
+    public ResponseEntity<Map<String, Object>> handleParametreManquant(MissingServletRequestParameterException ex) {
+        return construire(HttpStatus.BAD_REQUEST, "Parametre obligatoire manquant : " + ex.getParameterName());
+    }
+
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public ResponseEntity<Map<String, Object>> handleTypeInvalide(MethodArgumentTypeMismatchException ex) {
+        return construire(HttpStatus.BAD_REQUEST, "Valeur invalide pour le parametre '" + ex.getName()
+                + "' : " + ex.getValue() + " (dates au format yyyy-MM-dd, identifiants numeriques)");
+    }
+
+    @ExceptionHandler(ConflitException.class)
+    public ResponseEntity<Map<String, Object>> handleConflit(ConflitException ex) {
+        return construire(HttpStatus.CONFLICT, ex.getMessage());
     }
 
     @ExceptionHandler(IllegalArgumentException.class)

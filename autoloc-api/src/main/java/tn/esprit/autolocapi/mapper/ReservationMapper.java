@@ -21,7 +21,8 @@ public class ReservationMapper {
             e.getDateFin(),
             e.getStatut(),
             e.getVehicule() == null ? null : e.getVehicule().getIdVehicule(),
-            e.getClient() == null ? null : e.getClient().getIdClient()
+            e.getClient() == null ? null : e.getClient().getIdClient(),
+            e.getContrat() == null ? null : e.getContrat().getIdContrat()
         );
     }
 

@@ -1,18 +1,26 @@
 package tn.esprit.autolocapi.service;
 
-import tn.esprit.autolocapi.domain.Reservation;
+import tn.esprit.autolocapi.dto.ReservationInputDto;
+import tn.esprit.autolocapi.dto.ReservationResponseDto;
+import tn.esprit.autolocapi.dto.ReservationWithContratRequestDTO;
 
 import java.util.List;
 
 public interface IReservationService {
 
-    Reservation create(Reservation reservation);
+    ReservationResponseDto create(ReservationInputDto dto);
 
-    Reservation findById(Long id);
+    ReservationResponseDto findById(Long id);
 
-    List<Reservation> findAll();
+    List<ReservationResponseDto> findAll();
 
-    Reservation update(Long id, Reservation reservation);
+    ReservationResponseDto update(Long id, ReservationInputDto dto);
 
     void deleteById(Long id);
+
+    // ---- Services d'affectation
+
+    ReservationResponseDto affecterReservationAClient(Long idReservation, String nom, String prenom);
+
+    ReservationResponseDto creerReservationEtContratAssocie(ReservationWithContratRequestDTO requestDTO);
 }

@@ -3,7 +3,10 @@ package tn.esprit.autolocapi.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import tn.esprit.autolocapi.domain.Maintenance;
+import tn.esprit.autolocapi.dto.MaintenanceInputDto;
+import tn.esprit.autolocapi.dto.MaintenanceResponseDto;
 import tn.esprit.autolocapi.exception.ResourceNotFoundException;
+import tn.esprit.autolocapi.mapper.MaintenanceMapper;
 import tn.esprit.autolocapi.repository.IMaintenanceRepository;
 
 import java.util.List;
@@ -15,36 +18,40 @@ public class MaintenanceServiceImpl implements IMaintenanceService {
     private static final String RESSOURCE = "Maintenance";
 
     private final IMaintenanceRepository maintenanceRepository;
+    private final MaintenanceMapper mapper;
 
     @Override
-    public Maintenance create(Maintenance maintenance) {
-        if (maintenance.getIdMaintenance() != null) {
-            throw new IllegalArgumentException("Une nouvelle maintenance ne doit pas avoir d'identifiant");
-        }
+    public MaintenanceResponseDto create(MaintenanceInputDto dto) {
+        Maintenance maintenance = mapper.toEntity(dto);
         valider(maintenance);
-        return maintenanceRepository.save(maintenance);
+        return mapper.toDto(maintenanceRepository.save(maintenance));
     }
 
     @Override
-    public Maintenance findById(Long id) {
+    public MaintenanceResponseDto findById(Long id) {
+        return mapper.toDto(getEntity(id));
+    }
+
+    private Maintenance getEntity(Long id) {
         return maintenanceRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(RESSOURCE, id));
     }
 
     @Override
-    public List<Maintenance> findAll() {
-        return maintenanceRepository.findAll();
+    public List<MaintenanceResponseDto> findAll() {
+        return maintenanceRepository.findAll().stream().map(mapper::toDto).toList();
     }
 
     @Override
-    public Maintenance update(Long id, Maintenance maintenance) {
+    public MaintenanceResponseDto update(Long id, MaintenanceInputDto dto) {
+        Maintenance maintenance = mapper.toEntity(dto);
         valider(maintenance);
-        Maintenance existante = findById(id);
+        Maintenance existante = getEntity(id);
         existante.setDateDebut(maintenance.getDateDebut());
         existante.setDateFin(maintenance.getDateFin());
         existante.setDescription(maintenance.getDescription());
         if (maintenance.getVehicule() != null) existante.setVehicule(maintenance.getVehicule());
-        return maintenanceRepository.save(existante);
+        return mapper.toDto(maintenanceRepository.save(existante));
     }
 
     @Override

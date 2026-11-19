@@ -1,18 +1,24 @@
 package tn.esprit.autolocapi.service;
 
-import tn.esprit.autolocapi.domain.Contrat;
+import tn.esprit.autolocapi.dto.ContratInputDto;
+import tn.esprit.autolocapi.dto.ContratResponseDto;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface IContratService {
 
-    Contrat create(Contrat contrat);
+    ContratResponseDto create(ContratInputDto dto);
 
-    Contrat findById(Long id);
+    ContratResponseDto findById(Long id);
 
-    List<Contrat> findAll();
+    List<ContratResponseDto> findAll();
 
-    Contrat update(Long id, Contrat contrat);
+    ContratResponseDto update(Long id, ContratInputDto dto);
 
     void deleteById(Long id);
+
+    // ---- Service d'affectation
+
+    ContratResponseDto affecterContratAReservation(LocalDate dateSignature, LocalDate dateDebut, LocalDate dateFin);
 }

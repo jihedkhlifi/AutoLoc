@@ -1,18 +1,19 @@
 package tn.esprit.autolocapi.service;
 
-import tn.esprit.autolocapi.domain.Agence;
+import tn.esprit.autolocapi.dto.AgenceInputDto;
+import tn.esprit.autolocapi.dto.AgenceResponseDto;
 
 import java.util.List;
 
 public interface IAgenceService {
 
-    Agence create(Agence agence);
+    AgenceResponseDto create(AgenceInputDto dto);
 
-    Agence findById(Long id);
+    AgenceResponseDto findById(Long id);
 
-    List<Agence> findAll();
+    List<AgenceResponseDto> findAll();
 
-    Agence update(Long id, Agence agence);
+    AgenceResponseDto update(Long id, AgenceInputDto dto);
 
     void deleteById(Long id);
 }

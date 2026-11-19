@@ -2,8 +2,9 @@ package tn.esprit.autolocapi.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import tn.esprit.autolocapi.domain.Paiement;
+import tn.esprit.autolocapi.dto.PaiementResponseDto;
 import tn.esprit.autolocapi.exception.ResourceNotFoundException;
+import tn.esprit.autolocapi.mapper.PaiementMapper;
 import tn.esprit.autolocapi.repository.IPaiementRepository;
 
 import java.util.List;
@@ -13,15 +14,17 @@ import java.util.List;
 public class PaiementServiceImpl implements IPaiementService {
 
     private final IPaiementRepository paiementRepository;
+    private final PaiementMapper mapper;
 
     @Override
-    public Paiement findById(Long id) {
+    public PaiementResponseDto findById(Long id) {
         return paiementRepository.findById(id)
+                .map(mapper::toDto)
                 .orElseThrow(() -> new ResourceNotFoundException("Paiement", id));
     }
 
     @Override
-    public List<Paiement> findAll() {
-        return paiementRepository.findAll();
+    public List<PaiementResponseDto> findAll() {
+        return paiementRepository.findAll().stream().map(mapper::toDto).toList();
     }
 }

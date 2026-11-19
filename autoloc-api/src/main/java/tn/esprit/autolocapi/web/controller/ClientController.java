@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import tn.esprit.autolocapi.dto.ClientInputDto;
 import tn.esprit.autolocapi.dto.ClientResponseDto;
-import tn.esprit.autolocapi.mapper.ClientMapper;
 import jakarta.validation.Valid;
 import tn.esprit.autolocapi.service.IClientService;
 
@@ -31,7 +30,6 @@ import java.util.List;
 public class ClientController {
 
     private final IClientService clientService;
-    private final ClientMapper mapper;
 
     @Operation(summary = "Creer un client")
     @ApiResponses({ @ApiResponse(responseCode = "201", description = "Creation reussie"),
@@ -39,14 +37,14 @@ public class ClientController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ClientResponseDto create(@Valid @RequestBody ClientInputDto dto) {
-        return mapper.toDto(clientService.create(mapper.toEntity(dto)));
+        return clientService.create(dto);
     }
 
     @Operation(summary = "Lister les clients")
     @ApiResponses({ @ApiResponse(responseCode = "200", description = "Liste retournee") })
     @GetMapping
     public List<ClientResponseDto> findAll() {
-        return clientService.findAll().stream().map(mapper::toDto).toList();
+        return clientService.findAll();
     }
 
     @Operation(summary = "Consulter un client")
@@ -54,7 +52,7 @@ public class ClientController {
             @ApiResponse(responseCode = "404", description = "Ressource introuvable") })
     @GetMapping("/{id}")
     public ClientResponseDto findById(@Parameter(description = "Identifiant de la ressource") @PathVariable Long id) {
-        return mapper.toDto(clientService.findById(id));
+        return clientService.findById(id);
     }
 
     @Operation(summary = "Modifier un client")
@@ -63,7 +61,7 @@ public class ClientController {
             @ApiResponse(responseCode = "400", description = "Donnees invalides") })
     @PutMapping("/{id}")
     public ClientResponseDto update(@Parameter(description = "Identifiant de la ressource") @PathVariable Long id, @Valid @RequestBody ClientInputDto dto) {
-        return mapper.toDto(clientService.update(id, mapper.toEntity(dto)));
+        return clientService.update(id, dto);
     }
 
     @Operation(summary = "Supprimer un client")

@@ -11,5 +11,6 @@ public record ReservationResponseDto(
     LocalDate dateFin,
     StatutReservation statut,
     Long vehiculeId,
-    Long clientId
+    Long clientId,
+    Long contratId
 ) {}

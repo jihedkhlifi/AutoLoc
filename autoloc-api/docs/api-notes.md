@@ -12,45 +12,45 @@ Toutes les routes ci-dessous s'appuient sur **l'interface** du service, injecté
 |---|---|---|---|---|
 | `AgenceController` | `GET /api/agences` | `IAgenceService.findAll()` | 200 | — |
 | `AgenceController` | `GET /api/agences/{id}` | `IAgenceService.findById(id)` | 200 | 404 |
-| `AgenceController` | `POST /api/agences` | `IAgenceService.create(entité)` | 201 | 400 |
-| `AgenceController` | `PUT /api/agences/{id}` | `IAgenceService.update(id, entité)` | 200 | 400, 404 |
+| `AgenceController` | `POST /api/agences` | `IAgenceService.create(dto)` | 201 | 400 |
+| `AgenceController` | `PUT /api/agences/{id}` | `IAgenceService.update(id, dto)` | 200 | 400, 404 |
 | `AgenceController` | `DELETE /api/agences/{id}` | `IAgenceService.deleteById(id)` | 204 | 404 |
 | `EmployeController` | `GET /api/employes` | `IEmployeService.findAll()` | 200 | — |
 | `EmployeController` | `GET /api/employes/{id}` | `IEmployeService.findById(id)` | 200 | 404 |
-| `EmployeController` | `POST /api/employes` | `IEmployeService.create(entité)` | 201 | 400 |
-| `EmployeController` | `PUT /api/employes/{id}` | `IEmployeService.update(id, entité)` | 200 | 400, 404 |
+| `EmployeController` | `POST /api/employes` | `IEmployeService.create(dto)` | 201 | 400 |
+| `EmployeController` | `PUT /api/employes/{id}` | `IEmployeService.update(id, dto)` | 200 | 400, 404 |
 | `EmployeController` | `DELETE /api/employes/{id}` | `IEmployeService.deleteById(id)` | 204 | 404 |
 | `VehiculeController` | `GET /api/vehicules` | `IVehiculeService.findAll()` | 200 | — |
 | `VehiculeController` | `GET /api/vehicules/{id}` | `IVehiculeService.findById(id)` | 200 | 404 |
-| `VehiculeController` | `POST /api/vehicules` | `IVehiculeService.create(entité)` | 201 | 400 |
-| `VehiculeController` | `PUT /api/vehicules/{id}` | `IVehiculeService.update(id, entité)` | 200 | 400, 404 |
+| `VehiculeController` | `POST /api/vehicules` | `IVehiculeService.create(dto)` | 201 | 400 |
+| `VehiculeController` | `PUT /api/vehicules/{id}` | `IVehiculeService.update(id, dto)` | 200 | 400, 404 |
 | `VehiculeController` | `DELETE /api/vehicules/{id}` | `IVehiculeService.deleteById(id)` | 204 | 404 |
 | `EquipementController` | `GET /api/equipements` | `IEquipementService.findAll()` | 200 | — |
 | `EquipementController` | `GET /api/equipements/{id}` | `IEquipementService.findById(id)` | 200 | 404 |
-| `EquipementController` | `POST /api/equipements` | `IEquipementService.create(entité)` | 201 | 400 |
-| `EquipementController` | `PUT /api/equipements/{id}` | `IEquipementService.update(id, entité)` | 200 | 400, 404 |
+| `EquipementController` | `POST /api/equipements` | `IEquipementService.create(dto)` | 201 | 400 |
+| `EquipementController` | `PUT /api/equipements/{id}` | `IEquipementService.update(id, dto)` | 200 | 400, 404 |
 | `EquipementController` | `DELETE /api/equipements/{id}` | `IEquipementService.deleteById(id)` | 204 | 404 |
 | `ClientController` | `GET /api/clients` | `IClientService.findAll()` | 200 | — |
 | `ClientController` | `GET /api/clients/{id}` | `IClientService.findById(id)` | 200 | 404 |
-| `ClientController` | `POST /api/clients` | `IClientService.create(entité)` | 201 | 400 |
-| `ClientController` | `PUT /api/clients/{id}` | `IClientService.update(id, entité)` | 200 | 400, 404 |
+| `ClientController` | `POST /api/clients` | `IClientService.create(dto)` | 201 | 400 |
+| `ClientController` | `PUT /api/clients/{id}` | `IClientService.update(id, dto)` | 200 | 400, 404 |
 | `ClientController` | `DELETE /api/clients/{id}` | `IClientService.deleteById(id)` | 204 | 404 |
 | `ReservationController` | `GET /api/reservations` | `IReservationService.findAll()` | 200 | — |
 | `ReservationController` | `GET /api/reservations/{id}` | `IReservationService.findById(id)` | 200 | 404 |
-| `ReservationController` | `POST /api/reservations` | `IReservationService.create(entité)` | 201 | 400 |
-| `ReservationController` | `PUT /api/reservations/{id}` | `IReservationService.update(id, entité)` | 200 | 400, 404 |
+| `ReservationController` | `POST /api/reservations` | `IReservationService.create(dto)` | 201 | 400 |
+| `ReservationController` | `PUT /api/reservations/{id}` | `IReservationService.update(id, dto)` | 200 | 400, 404 |
 | `ReservationController` | `DELETE /api/reservations/{id}` | `IReservationService.deleteById(id)` | 204 | 404 |
 | `ContratController` | `GET /api/contrats` | `IContratService.findAll()` | 200 | — |
 | `ContratController` | `GET /api/contrats/{id}` | `IContratService.findById(id)` | 200 | 404 |
-| `ContratController` | `POST /api/contrats` | `IContratService.create(entité)` | 201 | 400 |
-| `ContratController` | `PUT /api/contrats/{id}` | `IContratService.update(id, entité)` | 200 | 400, 404 |
+| `ContratController` | `POST /api/contrats` | `IContratService.create(dto)` | 201 | 400 |
+| `ContratController` | `PUT /api/contrats/{id}` | `IContratService.update(id, dto)` | 200 | 400, 404 |
 | `ContratController` | `DELETE /api/contrats/{id}` | `IContratService.deleteById(id)` | 204 | 404 |
 | `PaiementController` | `GET /api/paiements` | `IPaiementService.findAll()` | 200 | — |
 | `PaiementController` | `GET /api/paiements/{id}` | `IPaiementService.findById(id)` | 200 | 404 |
 | `MaintenanceController` | `GET /api/maintenances` | `IMaintenanceService.findAll()` | 200 | — |
 | `MaintenanceController` | `GET /api/maintenances/{id}` | `IMaintenanceService.findById(id)` | 200 | 404 |
-| `MaintenanceController` | `POST /api/maintenances` | `IMaintenanceService.create(entité)` | 201 | 400 |
-| `MaintenanceController` | `PUT /api/maintenances/{id}` | `IMaintenanceService.update(id, entité)` | 200 | 400, 404 |
+| `MaintenanceController` | `POST /api/maintenances` | `IMaintenanceService.create(dto)` | 201 | 400 |
+| `MaintenanceController` | `PUT /api/maintenances/{id}` | `IMaintenanceService.update(id, dto)` | 200 | 400, 404 |
 | `MaintenanceController` | `DELETE /api/maintenances/{id}` | `IMaintenanceService.deleteById(id)` | 204 | 404 |
 
 - `POST /api/paiements` n'existe pas, donc doit retourner **405 Method Not Allowed**. Les paiements sont créés ou supprimés avec leur contrat.
@@ -128,3 +128,38 @@ Postman est idéal pour rejouer les tests et contrôler les statuts ; Swagger d�
 - [ ] `mvn clean verify` et `git commit` / `git push` sur le poste de travail
 
 **Remarque :** le modèle fourni n'a ni champ `quantite` pour Equipement ni `cout` pour Maintenance ; les cas 400 testent donc le libellé vide et une date de fin antérieure, respectivement, plutôt que des champs inexistants.
+
+## Services d'affectation (DTO, logique dans les services)
+
+Toutes les méthodes des services renvoient des DTO : la conversion entité ↔ DTO (mappers) se fait dans les `ServiceImpl`. Les contrôleurs se contentent d'appeler le service et de renvoyer son résultat.
+
+| Service (signature) | Endpoint | Succès | Erreurs |
+|---|---|---|---|
+| `IReservationService.affecterReservationAClient(Long idReservation, String nom, String prenom)` | `PUT /api/reservations/{idReservation}/affecter-client?nom=&prenom=` | 200 | 400 (paramètre vide, plusieurs clients homonymes), 404 |
+| `IVehiculeService.affecterVehiculeAEquipement(Long idVehicule, Long idEquipement)` | `PUT /api/vehicules/{idVehicule}/equipements/{idEquipement}` | 200 | 404, 409 (déjà affecté) |
+| `IVehiculeService.affecterMaintenanceAvehicule(String description, String immatriculation)` | `PUT /api/vehicules/affecter-maintenance?description=&immatriculation=` | 200 | 400, 404, 409 (maintenance d'un autre véhicule) |
+| `IContratService.affecterContratAReservation(LocalDate dateSignature, LocalDate dateDebut, LocalDate dateFin)` | `PUT /api/contrats/affecter-reservation?dateSignature=&dateDebut=&dateFin=` (format `yyyy-MM-dd`) | 200 | 400, 404, 409 (contrat ou réservation déjà lié) |
+| `IReservationService.creerReservationEtContratAssocie(ReservationWithContratRequestDTO requestDTO)` | `POST /api/reservations/avec-contrat` | 201 | 400, 404 |
+
+Règles métier :
+- Les recherches par attribut non unique (nom + prénom, description, immatriculation, dates) exigent **exactement un** résultat (`ResultatUnique`) : 0 → 404, plusieurs → 400.
+- `affecterMaintenanceAvehicule` passe le véhicule au statut `MAINTENANCE` si la maintenance est en cours aujourd'hui.
+- `creerReservationEtContratAssocie` est `@Transactional` : si le contrat échoue, la réservation n'est pas enregistrée. Statut par défaut `CONFIRMEE` ; si `montantTotal` est absent, il vaut `tarifJournalier × nombre de jours` (1 jour minimum). La signature doit précéder ou égaler la date de début.
+- `ReservationResponseDto` contient désormais `contratId`.
+
+Exemple de corps pour `POST /api/reservations/avec-contrat` :
+
+```json
+{
+  "dateDebut": "2026-12-20",
+  "dateFin": "2026-12-24",
+  "statut": "CONFIRMEE",
+  "vehiculeId": 1,
+  "clientId": 1,
+  "dateSignature": "2026-12-18",
+  "montantTotal": 360.0,
+  "valide": true
+}
+```
+
+Postman : dossier **Affectations (5 services)**, à exécuter dans l'ordre (P1–P6 créent des données uniques, puis 1–5, puis les cas d'erreur E1–E5).

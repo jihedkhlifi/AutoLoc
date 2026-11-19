@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import tn.esprit.autolocapi.dto.PaiementInputDto;
 import tn.esprit.autolocapi.dto.PaiementResponseDto;
-import tn.esprit.autolocapi.mapper.PaiementMapper;
 import jakarta.validation.Valid;
 import tn.esprit.autolocapi.service.IPaiementService;
 
@@ -25,13 +24,12 @@ import java.util.List;
 public class PaiementController {
 
     private final IPaiementService paiementService;
-    private final PaiementMapper mapper;
 
     @Operation(summary = "Lister les paiements")
     @ApiResponses({ @ApiResponse(responseCode = "200", description = "Liste retournee") })
     @GetMapping
     public List<PaiementResponseDto> findAll() {
-        return paiementService.findAll().stream().map(mapper::toDto).toList();
+        return paiementService.findAll();
     }
 
     @Operation(summary = "Consulter un paiement")
@@ -39,6 +37,6 @@ public class PaiementController {
             @ApiResponse(responseCode = "404", description = "Ressource introuvable") })
     @GetMapping("/{id}")
     public PaiementResponseDto findById(@Parameter(description = "Identifiant de la ressource") @PathVariable Long id) {
-        return mapper.toDto(paiementService.findById(id));
+        return paiementService.findById(id);
     }
 }

@@ -240,7 +240,7 @@
             "description": "",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"nom\": \"Ben Ali\",\n  \"prenom\": \"Samir\",\n  \"role\": \"AGENT\",\n  \"agence\": {\n    \"idAgence\": {{agencesId}}\n  }\n}",
+              "raw": "{\n  \"nom\": \"Ben Ali\",\n  \"prenom\": \"Samir\",\n  \"role\": \"AGENT\",\n  \"agenceId\": {{agencesId}}\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -297,7 +297,7 @@
             "description": "",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"nom\": \"Ben Ali\",\n  \"prenom\": \"Samir\",\n  \"role\": \"AGENT\",\n  \"agence\": {\n    \"idAgence\": {{agencesId}}\n  }\n}",
+              "raw": "{\n  \"nom\": \"Ben Ali\",\n  \"prenom\": \"Samir\",\n  \"role\": \"AGENT\",\n  \"agenceId\": {{agencesId}}\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -436,7 +436,7 @@
             "description": "",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"immatriculation\": \"123TUN456\",\n  \"marque\": \"Renault\",\n  \"modele\": \"Clio\",\n  \"categorie\": \"CITADINE\",\n  \"tarifJournalier\": 85,\n  \"statut\": \"DISPONIBLE\",\n  \"agence\": {\n    \"idAgence\": {{agencesId}}\n  }\n}",
+              "raw": "{\n  \"immatriculation\": \"123TUN456\",\n  \"marque\": \"Renault\",\n  \"modele\": \"Clio\",\n  \"categorie\": \"CITADINE\",\n  \"tarifJournalier\": 85,\n  \"statut\": \"DISPONIBLE\",\n  \"agenceId\": {{agencesId}}\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -493,7 +493,7 @@
             "description": "",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"immatriculation\": \"123TUN456\",\n  \"marque\": \"Renault\",\n  \"modele\": \"Clio\",\n  \"categorie\": \"CITADINE\",\n  \"tarifJournalier\": 85,\n  \"statut\": \"DISPONIBLE\",\n  \"agence\": {\n    \"idAgence\": {{agencesId}}\n  }\n}",
+              "raw": "{\n  \"immatriculation\": \"123TUN456\",\n  \"marque\": \"Renault\",\n  \"modele\": \"Clio\",\n  \"categorie\": \"CITADINE\",\n  \"tarifJournalier\": 85,\n  \"statut\": \"DISPONIBLE\",\n  \"agenceId\": {{agencesId}}\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -549,7 +549,7 @@
             "description": "",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"immatriculation\": \"123TUN456\",\n  \"marque\": \"Renault\",\n  \"modele\": \"Clio\",\n  \"categorie\": \"CITADINE\",\n  \"tarifJournalier\": -10,\n  \"statut\": \"DISPONIBLE\",\n  \"agence\": {\n    \"idAgence\": {{agencesId}}\n  }\n}",
+              "raw": "{\n  \"immatriculation\": \"123TUN456\",\n  \"marque\": \"Renault\",\n  \"modele\": \"Clio\",\n  \"categorie\": \"CITADINE\",\n  \"tarifJournalier\": -10,\n  \"statut\": \"DISPONIBLE\",\n  \"agenceId\": {{agencesId}}\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -1024,7 +1024,7 @@
             "description": "",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"dateDebut\": \"2026-11-02\",\n  \"dateFin\": \"2026-11-08\",\n  \"statut\": \"EN_ATTENTE\",\n  \"client\": {\n    \"idClient\": {{clientsId}}\n  },\n  \"vehicule\": {\n    \"idVehicule\": {{vehiculesId}}\n  }\n}",
+              "raw": "{\n  \"dateDebut\": \"2026-11-02\",\n  \"dateFin\": \"2026-11-08\",\n  \"statut\": \"EN_ATTENTE\",\n  \"clientId\": {{clientsId}},\n  \"vehiculeId\": {{vehiculesId}}\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -1081,7 +1081,7 @@
             "description": "",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"dateDebut\": \"2026-11-02\",\n  \"dateFin\": \"2026-11-08\",\n  \"statut\": \"EN_ATTENTE\",\n  \"client\": {\n    \"idClient\": {{clientsId}}\n  },\n  \"vehicule\": {\n    \"idVehicule\": {{vehiculesId}}\n  }\n}",
+              "raw": "{\n  \"dateDebut\": \"2026-11-02\",\n  \"dateFin\": \"2026-11-08\",\n  \"statut\": \"EN_ATTENTE\",\n  \"clientId\": {{clientsId}},\n  \"vehiculeId\": {{vehiculesId}}\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -1137,7 +1137,7 @@
             "description": "",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"dateDebut\": \"2026-11-09\",\n  \"dateFin\": \"2026-11-02\",\n  \"statut\": \"EN_ATTENTE\",\n  \"client\": {\n    \"idClient\": {{clientsId}}\n  },\n  \"vehicule\": {\n    \"idVehicule\": {{vehiculesId}}\n  }\n}",
+              "raw": "{\n  \"dateDebut\": \"2026-11-09\",\n  \"dateFin\": \"2026-11-02\",\n  \"statut\": \"EN_ATTENTE\",\n  \"clientId\": {{clientsId}},\n  \"vehiculeId\": {{vehiculesId}}\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -1355,41 +1355,6 @@
           ]
         },
         {
-          "name": "06b - Creer avec idContrat interdit (400)",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "url": "{{baseUrl}}/api/contrats",
-            "description": "Atelier 5 : un identifiant ne doit jamais etre fourni lors du POST.",
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"dateSignature\": \"2026-11-02\",\n  \"montantTotal\": 480.0,\n  \"valide\": true,\n  \"idContrat\": 5\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [],
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Statut 400\", () => pm.response.to.have.status(400));"
-                ]
-              }
-            }
-          ]
-        },
-        {
           "name": "07 - Creer contrat + 2 paiements (cascade)",
           "request": {
             "method": "POST",
@@ -1529,7 +1494,7 @@
             "description": "",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"dateDebut\": \"2026-11-02\",\n  \"dateFin\": \"2026-11-05\",\n  \"description\": \"Revision du vehicule\",\n  \"vehicule\": {\n    \"idVehicule\": {{vehiculesId}}\n  }\n}",
+              "raw": "{\n  \"dateDebut\": \"2026-11-02\",\n  \"dateFin\": \"2026-11-05\",\n  \"description\": \"Revision du vehicule\",\n  \"vehiculeId\": {{vehiculesId}}\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -1586,7 +1551,7 @@
             "description": "",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"dateDebut\": \"2026-11-02\",\n  \"dateFin\": \"2026-11-05\",\n  \"description\": \"Revision du vehicule\",\n  \"vehicule\": {\n    \"idVehicule\": {{vehiculesId}}\n  }\n}",
+              "raw": "{\n  \"dateDebut\": \"2026-11-02\",\n  \"dateFin\": \"2026-11-05\",\n  \"description\": \"Revision du vehicule\",\n  \"vehiculeId\": {{vehiculesId}}\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -1642,7 +1607,7 @@
             "description": "",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"dateDebut\": \"2026-11-07\",\n  \"dateFin\": \"2026-11-01\",\n  \"description\": \"Revision du vehicule\",\n  \"vehicule\": {\n    \"idVehicule\": {{vehiculesId}}\n  }\n}",
+              "raw": "{\n  \"dateDebut\": \"2026-11-07\",\n  \"dateFin\": \"2026-11-01\",\n  \"description\": \"Revision du vehicule\",\n  \"vehiculeId\": {{vehiculesId}}\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -1762,6 +1727,490 @@
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"Statut 405\", () => pm.response.to.have.status(405));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Affectations (5 services)",
+      "description": "Executer dans l'ordre (P1..P6 preparent des donnees uniques, puis 1..5, puis E1..E5).",
+      "item": [
+        {
+          "name": "P1 - Preparer : client",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/clients",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nom\": \"{{affNom}}\",\n  \"prenom\": \"Amine\",\n  \"email\": \"amine@example.com\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const t = Date.now();",
+                  "pm.environment.set('affNom', 'Trabelsi' + t);",
+                  "pm.environment.set('affImmat', 'AFF' + t);",
+                  "pm.environment.set('affDescription', 'Vidange ' + t);",
+                  "const iso = d => d.toISOString().slice(0, 10);",
+                  "const debut = new Date(Date.UTC(2030, 0, 1) + Math.floor(Math.random() * 20000) * 86400000);",
+                  "pm.environment.set('affDateDebut', iso(debut));",
+                  "pm.environment.set('affDateFin', iso(new Date(debut.getTime() + 5 * 86400000)));",
+                  "pm.environment.set('affDateSignature', iso(new Date(debut.getTime() - 86400000)));",
+                  "const today = new Date();",
+                  "pm.environment.set('affAujourdhui', iso(today));",
+                  "pm.environment.set('affDansTroisJours', iso(new Date(today.getTime() + 3 * 86400000)));"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Statut 201\", () => pm.response.to.have.status(201));",
+                  "pm.environment.set('affClientId', pm.response.json().idClient);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "P2 - Preparer : vehicule",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/vehicules",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"immatriculation\": \"{{affImmat}}\",\n  \"marque\": \"Peugeot\",\n  \"modele\": \"208\",\n  \"categorie\": \"CITADINE\",\n  \"tarifJournalier\": 90,\n  \"statut\": \"DISPONIBLE\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Statut 201\", () => pm.response.to.have.status(201));",
+                  "pm.environment.set('affVehiculeId', pm.response.json().idVehicule);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "P3 - Preparer : equipement",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/equipements",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"libelle\": \"Siege bebe\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Statut 201\", () => pm.response.to.have.status(201));",
+                  "pm.environment.set('affEquipementId', pm.response.json().idEquipement);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "P4 - Preparer : reservation sans client",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/reservations",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dateDebut\": \"{{affDateDebut}}\",\n  \"dateFin\": \"{{affDateFin}}\",\n  \"statut\": \"EN_ATTENTE\",\n  \"vehiculeId\": {{affVehiculeId}}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Statut 201\", () => pm.response.to.have.status(201));",
+                  "pm.environment.set('affReservationId', pm.response.json().idReservation);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "P5 - Preparer : contrat sans reservation",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/contrats",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dateSignature\": \"{{affDateSignature}}\",\n  \"montantTotal\": 450.0,\n  \"valide\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Statut 201\", () => pm.response.to.have.status(201));",
+                  "pm.environment.set('affContratId', pm.response.json().idContrat);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "P6 - Preparer : maintenance sans vehicule",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/maintenances",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dateDebut\": \"{{affAujourdhui}}\",\n  \"dateFin\": \"{{affDansTroisJours}}\",\n  \"description\": \"{{affDescription}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Statut 201\", () => pm.response.to.have.status(201));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "1 - affecterReservationAClient",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": "{{baseUrl}}/api/reservations/{{affReservationId}}/affecter-client?nom={{affNom}}&prenom=Amine",
+            "description": ""
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Statut 200\", () => pm.response.to.have.status(200));",
+                  "pm.test('Client affecte', () => pm.expect(pm.response.json().clientId).to.eql(Number(pm.environment.get('affClientId'))));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "2 - affecterVehiculeAEquipement",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": "{{baseUrl}}/api/vehicules/{{affVehiculeId}}/equipements/{{affEquipementId}}",
+            "description": ""
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Statut 200\", () => pm.response.to.have.status(200));",
+                  "pm.test('Equipement present', () => pm.expect(pm.response.json().equipementIds).to.include(Number(pm.environment.get('affEquipementId'))));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "3 - affecterMaintenanceAvehicule",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": "{{baseUrl}}/api/vehicules/affecter-maintenance?description={{affDescription}}&immatriculation={{affImmat}}",
+            "description": ""
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Statut 200\", () => pm.response.to.have.status(200));",
+                  "pm.test('Vehicule en maintenance', () => pm.expect(pm.response.json().statut).to.eql('MAINTENANCE'));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "4 - affecterContratAReservation",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": "{{baseUrl}}/api/contrats/affecter-reservation?dateSignature={{affDateSignature}}&dateDebut={{affDateDebut}}&dateFin={{affDateFin}}",
+            "description": ""
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Statut 200\", () => pm.response.to.have.status(200));",
+                  "pm.test('Reservation liee', () => pm.expect(pm.response.json().reservationId).to.eql(Number(pm.environment.get('affReservationId'))));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "5 - creerReservationEtContratAssocie",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/reservations/avec-contrat",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dateDebut\": \"2026-12-20\",\n  \"dateFin\": \"2026-12-24\",\n  \"vehiculeId\": {{affVehiculeId}},\n  \"clientId\": {{affClientId}},\n  \"dateSignature\": \"2026-12-18\",\n  \"valide\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Statut 201\", () => pm.response.to.have.status(201));",
+                  "pm.test('Contrat cree', () => pm.expect(pm.response.json().contratId).to.be.a('number'));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "E1 - Equipement deja affecte (409)",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": "{{baseUrl}}/api/vehicules/{{affVehiculeId}}/equipements/{{affEquipementId}}",
+            "description": ""
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Statut 409\", () => pm.response.to.have.status(409));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "E2 - Client inexistant (404)",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": "{{baseUrl}}/api/reservations/{{affReservationId}}/affecter-client?nom=Inconnu&prenom=Personne",
+            "description": ""
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Statut 404\", () => pm.response.to.have.status(404));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "E3 - Parametre vide (400)",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": "{{baseUrl}}/api/vehicules/affecter-maintenance?description=&immatriculation={{affImmat}}",
+            "description": ""
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Statut 400\", () => pm.response.to.have.status(400));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "E4 - Date mal formee (400)",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": "{{baseUrl}}/api/contrats/affecter-reservation?dateSignature=hier&dateDebut=2030-01-01&dateFin=2030-01-05",
+            "description": ""
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Statut 400\", () => pm.response.to.have.status(400));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "E5 - Reservation + contrat invalide (400)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/reservations/avec-contrat",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dateDebut\": \"2026-12-24\",\n  \"dateFin\": \"2026-12-20\",\n  \"vehiculeId\": {{affVehiculeId}},\n  \"dateSignature\": \"2026-12-30\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Statut 400\", () => pm.response.to.have.status(400));"
                 ]
               }
             }

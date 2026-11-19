@@ -3,7 +3,10 @@ package tn.esprit.autolocapi.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import tn.esprit.autolocapi.domain.Client;
+import tn.esprit.autolocapi.dto.ClientInputDto;
+import tn.esprit.autolocapi.dto.ClientResponseDto;
 import tn.esprit.autolocapi.exception.ResourceNotFoundException;
+import tn.esprit.autolocapi.mapper.ClientMapper;
 import tn.esprit.autolocapi.repository.IClientRepository;
 
 import java.util.List;
@@ -15,38 +18,42 @@ public class ClientServiceImpl implements IClientService {
     private static final String RESSOURCE = "Client";
 
     private final IClientRepository clientRepository;
+    private final ClientMapper mapper;
 
     @Override
-    public Client create(Client client) {
-        if (client.getIdClient() != null) {
-            throw new IllegalArgumentException("Un nouveau client ne doit pas avoir d'identifiant");
-        }
+    public ClientResponseDto create(ClientInputDto dto) {
+        Client client = mapper.toEntity(dto);
         valider(client);
-        return clientRepository.save(client);
+        return mapper.toDto(clientRepository.save(client));
     }
 
     @Override
-    public Client findById(Long id) {
+    public ClientResponseDto findById(Long id) {
+        return mapper.toDto(getEntity(id));
+    }
+
+    private Client getEntity(Long id) {
         return clientRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(RESSOURCE, id));
     }
 
     @Override
-    public List<Client> findAll() {
-        return clientRepository.findAll();
+    public List<ClientResponseDto> findAll() {
+        return clientRepository.findAll().stream().map(mapper::toDto).toList();
     }
 
     @Override
-    public Client update(Long id, Client client) {
+    public ClientResponseDto update(Long id, ClientInputDto dto) {
+        Client client = mapper.toEntity(dto);
         valider(client);
-        Client existant = findById(id);
+        Client existant = getEntity(id);
         existant.setNom(client.getNom());
         existant.setPrenom(client.getPrenom());
         existant.setEmail(client.getEmail());
         existant.setTelephone(client.getTelephone());
         existant.setNumPermis(client.getNumPermis());
         existant.setDateInscription(client.getDateInscription());
-        return clientRepository.save(existant);
+        return mapper.toDto(clientRepository.save(existant));
     }
 
     @Override

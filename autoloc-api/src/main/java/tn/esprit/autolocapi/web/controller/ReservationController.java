@@ -14,12 +14,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import tn.esprit.autolocapi.dto.ReservationInputDto;
 import tn.esprit.autolocapi.dto.ReservationResponseDto;
-import tn.esprit.autolocapi.mapper.ReservationMapper;
+import tn.esprit.autolocapi.dto.ReservationWithContratRequestDTO;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 import tn.esprit.autolocapi.service.IReservationService;
 
 import java.util.List;
@@ -31,7 +33,6 @@ import java.util.List;
 public class ReservationController {
 
     private final IReservationService reservationService;
-    private final ReservationMapper mapper;
 
     @Operation(summary = "Creer une reservation")
     @ApiResponses({ @ApiResponse(responseCode = "201", description = "Creation reussie"),
@@ -39,14 +40,14 @@ public class ReservationController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ReservationResponseDto create(@Valid @RequestBody ReservationInputDto dto) {
-        return mapper.toDto(reservationService.create(mapper.toEntity(dto)));
+        return reservationService.create(dto);
     }
 
     @Operation(summary = "Lister les reservations")
     @ApiResponses({ @ApiResponse(responseCode = "200", description = "Liste retournee") })
     @GetMapping
     public List<ReservationResponseDto> findAll() {
-        return reservationService.findAll().stream().map(mapper::toDto).toList();
+        return reservationService.findAll();
     }
 
     @Operation(summary = "Consulter une reservation")
@@ -54,7 +55,7 @@ public class ReservationController {
             @ApiResponse(responseCode = "404", description = "Ressource introuvable") })
     @GetMapping("/{id}")
     public ReservationResponseDto findById(@Parameter(description = "Identifiant de la ressource") @PathVariable Long id) {
-        return mapper.toDto(reservationService.findById(id));
+        return reservationService.findById(id);
     }
 
     @Operation(summary = "Modifier une reservation")
@@ -63,7 +64,7 @@ public class ReservationController {
             @ApiResponse(responseCode = "400", description = "Donnees invalides") })
     @PutMapping("/{id}")
     public ReservationResponseDto update(@Parameter(description = "Identifiant de la ressource") @PathVariable Long id, @Valid @RequestBody ReservationInputDto dto) {
-        return mapper.toDto(reservationService.update(id, mapper.toEntity(dto)));
+        return reservationService.update(id, dto);
     }
 
     @Operation(summary = "Supprimer une reservation")
@@ -73,5 +74,29 @@ public class ReservationController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteById(@Parameter(description = "Identifiant de la ressource") @PathVariable Long id) {
         reservationService.deleteById(id);
+    }
+
+    // ---- Services d'affectation
+
+    @Operation(summary = "Affecter une reservation a un client", description = "Le client est recherche par son nom et son prenom")
+    @ApiResponses({ @ApiResponse(responseCode = "200", description = "Affectation reussie"),
+            @ApiResponse(responseCode = "400", description = "Parametres invalides ou client ambigu"),
+            @ApiResponse(responseCode = "404", description = "Reservation ou client introuvable") })
+    @PutMapping("/{idReservation}/affecter-client")
+    public ReservationResponseDto affecterReservationAClient(
+            @Parameter(description = "Identifiant de la reservation") @PathVariable Long idReservation,
+            @RequestParam @NotBlank(message = "Le nom du client est obligatoire") String nom,
+            @RequestParam @NotBlank(message = "Le prenom du client est obligatoire") String prenom) {
+        return reservationService.affecterReservationAClient(idReservation, nom, prenom);
+    }
+
+    @Operation(summary = "Creer une reservation et son contrat associe")
+    @ApiResponses({ @ApiResponse(responseCode = "201", description = "Reservation et contrat crees"),
+            @ApiResponse(responseCode = "400", description = "Donnees invalides"),
+            @ApiResponse(responseCode = "404", description = "Vehicule ou client introuvable") })
+    @PostMapping("/avec-contrat")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ReservationResponseDto creerReservationEtContratAssocie(@Valid @RequestBody ReservationWithContratRequestDTO requestDTO) {
+        return reservationService.creerReservationEtContratAssocie(requestDTO);
     }
 }

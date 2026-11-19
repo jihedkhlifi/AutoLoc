@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import tn.esprit.autolocapi.dto.MaintenanceInputDto;
 import tn.esprit.autolocapi.dto.MaintenanceResponseDto;
-import tn.esprit.autolocapi.mapper.MaintenanceMapper;
 import jakarta.validation.Valid;
 import tn.esprit.autolocapi.service.IMaintenanceService;
 
@@ -31,7 +30,6 @@ import java.util.List;
 public class MaintenanceController {
 
     private final IMaintenanceService maintenanceService;
-    private final MaintenanceMapper mapper;
 
     @Operation(summary = "Creer une maintenance")
     @ApiResponses({ @ApiResponse(responseCode = "201", description = "Creation reussie"),
@@ -39,14 +37,14 @@ public class MaintenanceController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public MaintenanceResponseDto create(@Valid @RequestBody MaintenanceInputDto dto) {
-        return mapper.toDto(maintenanceService.create(mapper.toEntity(dto)));
+        return maintenanceService.create(dto);
     }
 
     @Operation(summary = "Lister les maintenances")
     @ApiResponses({ @ApiResponse(responseCode = "200", description = "Liste retournee") })
     @GetMapping
     public List<MaintenanceResponseDto> findAll() {
-        return maintenanceService.findAll().stream().map(mapper::toDto).toList();
+        return maintenanceService.findAll();
     }
 
     @Operation(summary = "Consulter une maintenance")
@@ -54,7 +52,7 @@ public class MaintenanceController {
             @ApiResponse(responseCode = "404", description = "Ressource introuvable") })
     @GetMapping("/{id}")
     public MaintenanceResponseDto findById(@Parameter(description = "Identifiant de la ressource") @PathVariable Long id) {
-        return mapper.toDto(maintenanceService.findById(id));
+        return maintenanceService.findById(id);
     }
 
     @Operation(summary = "Modifier une maintenance")
@@ -63,7 +61,7 @@ public class MaintenanceController {
             @ApiResponse(responseCode = "400", description = "Donnees invalides") })
     @PutMapping("/{id}")
     public MaintenanceResponseDto update(@Parameter(description = "Identifiant de la ressource") @PathVariable Long id, @Valid @RequestBody MaintenanceInputDto dto) {
-        return mapper.toDto(maintenanceService.update(id, mapper.toEntity(dto)));
+        return maintenanceService.update(id, dto);
     }
 
     @Operation(summary = "Supprimer une maintenance")

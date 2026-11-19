@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import tn.esprit.autolocapi.dto.EquipementInputDto;
 import tn.esprit.autolocapi.dto.EquipementResponseDto;
-import tn.esprit.autolocapi.mapper.EquipementMapper;
 import jakarta.validation.Valid;
 import tn.esprit.autolocapi.service.IEquipementService;
 
@@ -31,7 +30,6 @@ import java.util.List;
 public class EquipementController {
 
     private final IEquipementService equipementService;
-    private final EquipementMapper mapper;
 
     @Operation(summary = "Creer un equipement")
     @ApiResponses({ @ApiResponse(responseCode = "201", description = "Creation reussie"),
@@ -39,14 +37,14 @@ public class EquipementController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public EquipementResponseDto create(@Valid @RequestBody EquipementInputDto dto) {
-        return mapper.toDto(equipementService.create(mapper.toEntity(dto)));
+        return equipementService.create(dto);
     }
 
     @Operation(summary = "Lister les equipements")
     @ApiResponses({ @ApiResponse(responseCode = "200", description = "Liste retournee") })
     @GetMapping
     public List<EquipementResponseDto> findAll() {
-        return equipementService.findAll().stream().map(mapper::toDto).toList();
+        return equipementService.findAll();
     }
 
     @Operation(summary = "Consulter un equipement")
@@ -54,7 +52,7 @@ public class EquipementController {
             @ApiResponse(responseCode = "404", description = "Ressource introuvable") })
     @GetMapping("/{id}")
     public EquipementResponseDto findById(@Parameter(description = "Identifiant de la ressource") @PathVariable Long id) {
-        return mapper.toDto(equipementService.findById(id));
+        return equipementService.findById(id);
     }
 
     @Operation(summary = "Modifier un equipement")
@@ -63,7 +61,7 @@ public class EquipementController {
             @ApiResponse(responseCode = "400", description = "Donnees invalides") })
     @PutMapping("/{id}")
     public EquipementResponseDto update(@Parameter(description = "Identifiant de la ressource") @PathVariable Long id, @Valid @RequestBody EquipementInputDto dto) {
-        return mapper.toDto(equipementService.update(id, mapper.toEntity(dto)));
+        return equipementService.update(id, dto);
     }
 
     @Operation(summary = "Supprimer un equipement")
